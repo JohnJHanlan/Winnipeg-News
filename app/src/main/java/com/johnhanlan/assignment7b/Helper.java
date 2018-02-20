@@ -9,13 +9,18 @@ import java.util.ArrayList;
 public final class Helper {
 
     //Feeds
-    public static ArrayList<Article> freePressArticles = new ArrayList<Article>();
+    public static ArrayList<Article> localArticles = new ArrayList<Article>();
+    public static ArrayList<Article> breakingArticles = new ArrayList<Article>();
+    public static ArrayList<Article> worldArticles = new ArrayList<Article>();
+
+    public static ArrayList<ArrayList<Article>> articles = new ArrayList<ArrayList<Article>>();
 
     //positions
     public static int position = 0;
+    public static int feed = 0;
 
     private Helper() {
-        //freePressArticles = new ArrayList<Article>();
+        //localArticles = new ArrayList<Article>();
     }
 
 }

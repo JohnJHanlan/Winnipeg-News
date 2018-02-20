@@ -29,10 +29,14 @@ public class MainActivity extends AppCompatActivity
 
         processRSSTask = new ProcessRSSTask();
         try{
-            processRSSTask.execute().get();
+            processRSSTask.execute();
         } catch (Exception e) {
             Toast.makeText(this, "Didn't wait for other thread", Toast.LENGTH_LONG).show();
         }
+
+        Helper.articles.add(Helper.localArticles);
+        Helper.articles.add(Helper.breakingArticles);
+        Helper.articles.add(Helper.worldArticles);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,7 +53,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadFeeds(CustomAdapter customAdapter){
-        customAdapter = new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.freePressArticles);
+        //setContentView(R.layout.content_main);
+        customAdapter.notifyDataSetChanged();
+       //customAdapter = new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.localArticles);
 
         //set the adapter of the ListView
         listView = findViewById(R.id.nice_listview);
@@ -104,16 +110,32 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_free_press_button) {
+        if (id == R.id.nav_loacl_button) {
+
+            Helper.feed = 0;
 
             loadFeeds(new CustomAdapter(
                     MainActivity.this,
                     R.layout.list_item,
-                    Helper.freePressArticles));
+                    Helper.localArticles));
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_breaking_button) {
 
-        } else if (id == R.id.nav_slideshow) {
+            Helper.feed = 1;
+
+            loadFeeds(new CustomAdapter(
+                    MainActivity.this,
+                    R.layout.list_item,
+                    Helper.breakingArticles));
+
+        } else if (id == R.id.nav_world_button) {
+
+            Helper.feed = 2;
+
+            loadFeeds(new CustomAdapter(
+                    MainActivity.this,
+                    R.layout.list_item,
+                    Helper.worldArticles));
 
         } else if (id == R.id.nav_manage) {
 

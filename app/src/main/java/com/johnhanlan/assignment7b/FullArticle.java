@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class FullArticle extends AppCompatActivity {
 
     private TextView tvTitle;
@@ -26,25 +24,29 @@ public class FullArticle extends AppCompatActivity {
         tvPubDate     = findViewById(R.id.full_article_pubDate);
 
         tvTitle.setText(
-                Helper.freePressArticles
+                Helper.articles
+                .get(Helper.feed)
                 .get(Helper.position)
                 .getTitle()
         );
 
         tvDescription.setText(
-                Helper.freePressArticles
+                Helper.articles
+                .get(Helper.feed)
                 .get(Helper.position)
                 .getDescription()
         );
 
         tvLink.setText(
-                Helper.freePressArticles
+                Helper.articles
+                .get(Helper.feed)
                 .get(Helper.position)
                 .getLink()
         );
 
         tvPubDate.setText(
-                Helper.freePressArticles
+                Helper.articles
+                .get(Helper.feed)
                 .get(Helper.position)
                 .getPubDate()
         );

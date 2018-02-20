@@ -22,6 +22,8 @@ class FreepHandler extends DefaultHandler {
 
     private StringBuffer stringBuffer;
 
+    private int counter;
+
     //Initialization block
     {
         titles = new ArrayList<String>();
@@ -30,20 +32,8 @@ class FreepHandler extends DefaultHandler {
         pubDates = new ArrayList<String>();
     }
 
-    //Can probably get rid of this method. Using helper class now.
-    public ArrayList<Article> getArticles() {
-
-        ArrayList<Article> articles = new ArrayList<Article>();
-
-        //titles.add("Test");
-
-        //titles.trimToSize();
-
-        for (int i = 0; i < titles.size(); i++) {
-            articles.add(new Article(titles.get(i), descriptions.get(i), links.get(i), pubDates.get(i)));
-        }
-
-        return articles;
+    public FreepHandler(int counter) {
+        this.counter = counter;
     }
 
     @Override
@@ -68,11 +58,19 @@ class FreepHandler extends DefaultHandler {
             Log.d("John", s);
         }
 
-        for (int i = 0; i < titles.size(); i++) {
-            com.johnhanlan.assignment7b.Helper.freePressArticles.add(new Article(titles.get(i), descriptions.get(i), links.get(i), pubDates.get(i)));
+        if(counter == 1) {
+            for (int i = 0; i < titles.size(); i++) {
+                com.johnhanlan.assignment7b.Helper.localArticles.add(new Article(titles.get(i), descriptions.get(i), links.get(i), pubDates.get(i)));
+            }
+        } else if (counter == 2) {
+            for (int i = 0; i < titles.size(); i++) {
+                Helper.breakingArticles.add(new Article(titles.get(i), descriptions.get(i), links.get(i), pubDates.get(i)));
+            }
+        } else if (counter == 3) {
+            for (int i = 0; i < titles.size(); i++) {
+                Helper.worldArticles.add(new Article(titles.get(i), descriptions.get(i), links.get(i), pubDates.get(i)));
+            }
         }
-
-        //MainActivity.artical = new ArrayList<String>(titles);
 
     }
 

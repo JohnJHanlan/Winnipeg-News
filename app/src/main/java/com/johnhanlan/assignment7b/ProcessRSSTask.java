@@ -24,6 +24,7 @@ import javax.xml.parsers.SAXParserFactory;
 public class ProcessRSSTask extends AsyncTask<Void, Void, Void> {
 
     private FreepHandler freepHandler;
+    private ArrayList<String> urls;
 
     @Override
     protected void onPreExecute() {
@@ -35,57 +36,58 @@ public class ProcessRSSTask extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         Log.d("John", "doInBackground");
 
-        URL url = null;
-        try {
-            url = new URL("https://www.winnipegfreepress.com/rss/?path=%2Flocal");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        urls = new ArrayList<String>();
+        urls.add("https://www.winnipegfreepress.com/rss/?path=%2Flocal");
+        urls.add("https://www.winnipegfreepress.com/rss/?path=%2Fbreakingnews");
+        urls.add("https://www.winnipegfreepress.com/rss/?path=%2Fworld");
 
-        SAXParser saxParser = null;
-        try {
-            saxParser = SAXParserFactory.newInstance().newSAXParser();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
+        int counter = 1;
 
-        HttpURLConnection connection = null;
-        try {
-            connection = (HttpURLConnection)url.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        for (String currentUrl: urls) {
 
-        InputStream inputStream = null;
-        try {
-            inputStream = connection.getInputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            URL url = null;
+            try {
+                url = new URL(currentUrl);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
 
-        //Possible fix to special characters
-        //Don't need this, stringBuffer fixed the bug
-        //InputSource is = new InputSource(url.openStream()); is.setEncoding("ISO-8859-1"); xr.parse(is);
+            SAXParser saxParser = null;
+            try {
+                saxParser = SAXParserFactory.newInstance().newSAXParser();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (SAXException e) {
+                e.printStackTrace();
+            }
 
-        // create instance of our FreepHandler
-        freepHandler = new FreepHandler();
+            HttpURLConnection connection = null;
+            try {
+                connection = (HttpURLConnection) url.openConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            saxParser.parse(inputStream, freepHandler);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            InputStream inputStream = null;
+            try {
+                inputStream = connection.getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // create instance of our FreepHandler
+            freepHandler = new FreepHandler(counter++);
+
+            try {
+                saxParser.parse(inputStream, freepHandler);
+            } catch (SAXException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
-    }
-
-    //Probably can get rid of this since using helper class now.
-    public ArrayList<Article> getArticles() {
-        return freepHandler.getArticles();
     }
 
     @Override

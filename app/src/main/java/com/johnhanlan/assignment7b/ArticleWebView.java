@@ -1,11 +1,8 @@
 package com.johnhanlan.assignment7b;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -23,7 +20,7 @@ public class ArticleWebView extends AppCompatActivity {
         wvArticleWebView = findViewById(R.id.articleWebView);
 
         // Load the URL
-        wvArticleWebView.loadUrl(Helper.freePressArticles.get(Helper.position).getLink());
+        wvArticleWebView.loadUrl(Helper.localArticles.get(Helper.position).getLink());
 
         // Opens the link in the WebView
         wvArticleWebView.setWebViewClient(new WebViewClient());
@@ -55,12 +52,12 @@ public class ArticleWebView extends AppCompatActivity {
 //            //return super.shouldOverrideUrlLoading(view, request);
 //
 //            // Check for the proper website
-//            if (Uri.parse(url).getHost().equals(Helper.freePressArticles.get(Helper.position).getLink())) {
+//            if (Uri.parse(url).getHost().equals(Helper.localArticles.get(Helper.position).getLink())) {
 //                return false;
 //            }
 //
 //            // Otherwise open the default Web Browser
-//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Helper.freePressArticles.get(Helper.position).getLink()));
+//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Helper.localArticles.get(Helper.position).getLink()));
 //            startActivity(intent);
 //            return true;
 //        }
