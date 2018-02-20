@@ -1,9 +1,7 @@
 package com.johnhanlan.assignment7b;
 
-import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,31 +11,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //private NavigationView freePress;
-    //private TextView tvView;
+    private ListView listView;
+    //private CustomAdapter customAdapter;
+    private ProcessRSSTask processRSSTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        processRSSTask = new ProcessRSSTask();
+        try{
+            processRSSTask.execute().get();
+        } catch (Exception e) {
+            Toast.makeText(this, "Didn't wait for other thread", Toast.LENGTH_LONG).show();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //tvView = findViewById(R.id.firstView);
-        //freePress = findViewById(R.id.freePressButton);
-
-        //freePress.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_LONG);
-//            }
-//        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -48,6 +46,24 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void loadFeeds(CustomAdapter customAdapter){
+        customAdapter = new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.freePressArticles);
+
+        //set the adapter of the ListView
+        listView = findViewById(R.id.nice_listview);
+        listView.setAdapter(customAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Helper.position = position;
+
+                Intent intent = new Intent(MainActivity.this, FullArticle.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -88,10 +104,13 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.freePressButton) {
-            // Handle the camera action
-            Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_LONG);
-            //tvView.setText("It Worked");
+        if (id == R.id.nav_free_press_button) {
+
+            loadFeeds(new CustomAdapter(
+                    MainActivity.this,
+                    R.layout.list_item,
+                    Helper.freePressArticles));
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
