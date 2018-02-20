@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_loacl_button) {
+        if (id == R.id.nav_local_button) {
 
             Helper.feed = 0;
 
@@ -136,13 +136,6 @@ public class MainActivity extends AppCompatActivity
                     MainActivity.this,
                     R.layout.list_item,
                     Helper.worldArticles));
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

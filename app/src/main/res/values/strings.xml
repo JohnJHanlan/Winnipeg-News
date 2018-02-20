@@ -1,10 +1,12 @@
 <resources>
-    <string name="app_name">Assignment7b</string>
+    <string name="app_name">NewsFeed</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
 
-    <string name="winnipeg_free_press">Winnipeg Free Press</string>
+    <string name="local_feed">Local Feed</string>
+    <string name="breaking_feed">Breaking Feed</string>
+    <string name="world_feed">World Feed</string>
 </resources>
