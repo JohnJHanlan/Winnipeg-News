@@ -20,7 +20,10 @@ public class ArticleWebView extends AppCompatActivity {
         wvArticleWebView = findViewById(R.id.articleWebView);
 
         // Load the URL
-        wvArticleWebView.loadUrl(Helper.localArticles.get(Helper.position).getLink());
+        wvArticleWebView.loadUrl(Helper
+                .articles.get(Helper.feed)
+                .get(Helper.position)
+                .getLink());
 
         // Opens the link in the WebView
         wvArticleWebView.setWebViewClient(new WebViewClient());
