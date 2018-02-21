@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Helper.localArticles.clear();
+        Helper.breakingArticles.clear();
+        Helper.worldArticles.clear();
+
         processRSSTask = new ProcessRSSTask();
         try{
             processRSSTask.execute().get();
@@ -34,9 +38,11 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Didn't wait for other thread", Toast.LENGTH_LONG).show();
         }
 
-        Helper.articles.add(Helper.localArticles);
-        Helper.articles.add(Helper.breakingArticles);
-        Helper.articles.add(Helper.worldArticles);
+        if(Helper.articles.size() == 0) {
+            Helper.articles.add(Helper.localArticles);
+            Helper.articles.add(Helper.breakingArticles);
+            Helper.articles.add(Helper.worldArticles);
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
