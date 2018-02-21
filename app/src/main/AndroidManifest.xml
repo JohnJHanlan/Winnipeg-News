@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".FullArticle" />
-        <activity android:name=".ArticleWebView"></activity>
+        <activity android:name=".ArticleWebView" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

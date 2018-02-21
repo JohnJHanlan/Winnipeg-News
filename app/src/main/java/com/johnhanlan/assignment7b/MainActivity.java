@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
 
         processRSSTask = new ProcessRSSTask();
         try{
-            processRSSTask.execute();
+            processRSSTask.execute().get();
         } catch (Exception e) {
             Toast.makeText(this, "Didn't wait for other thread", Toast.LENGTH_LONG).show();
         }
@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        loadFeeds(new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.articles.get(Helper.feed)));
     }
 
     private void loadFeeds(CustomAdapter customAdapter){
@@ -102,6 +104,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.action_refresh) {
             finish();
             startActivity(getIntent());
+            loadFeeds(new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.articles.get(Helper.feed)));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
