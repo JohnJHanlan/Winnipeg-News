@@ -29,8 +29,6 @@ public class FullArticle extends AppCompatActivity {
         tvLink        = findViewById(R.id.full_article_link);
         tvPubDate     = findViewById(R.id.full_article_pubDate);
 
-        tvDescription.setTextSize(sharedPreferences.getInt("text_size", 18));
-
         tvTitle.setText(
                 Helper.articles
                 .get(Helper.feed)
@@ -73,5 +71,6 @@ public class FullArticle extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Helper.setBackgroundRelative(sharedPreferences, (RelativeLayout) findViewById(R.id.full_article_background));
+        tvDescription.setTextSize(sharedPreferences.getInt("text_size", 18));
     }
 }
