@@ -29,6 +29,8 @@ public class FullArticle extends AppCompatActivity {
         tvLink        = findViewById(R.id.full_article_link);
         tvPubDate     = findViewById(R.id.full_article_pubDate);
 
+        tvDescription.setTextSize(sharedPreferences.getInt("text_size", 18));
+
         tvTitle.setText(
                 Helper.articles
                 .get(Helper.feed)
