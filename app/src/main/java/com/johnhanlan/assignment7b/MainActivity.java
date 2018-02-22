@@ -1,6 +1,7 @@
 package com.johnhanlan.assignment7b;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,10 +24,16 @@ public class MainActivity extends AppCompatActivity
     //private CustomAdapter customAdapter;
     private ProcessRSSTask processRSSTask;
 
+    private SharedPreferences sharedPreferences;
+    private LinearLayout main_view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = getSharedPreferences("general", 0);
+        main_view = findViewById(R.id.main_content_background);
 
         Helper.localArticles.clear();
         Helper.breakingArticles.clear();
@@ -58,6 +66,12 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         loadFeeds(new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.articles.get(Helper.feed)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Helper.setBackgroundLinear(sharedPreferences, main_view);
     }
 
     private void loadFeeds(CustomAdapter customAdapter){

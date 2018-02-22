@@ -1,5 +1,10 @@
 package com.johnhanlan.assignment7b;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
 import java.util.ArrayList;
 
 /**
@@ -21,6 +26,30 @@ public final class Helper {
 
     private Helper() {
         //localArticles = new ArrayList<Article>();
+    }
+
+    public static void setBackgroundLinear(SharedPreferences sharedPreferences, LinearLayout background){
+        switch (sharedPreferences.getString("background_colour", "blank")){
+            case "gray":
+                background.setBackgroundColor(Color.GRAY);
+                break;
+
+            case "white":
+                background.setBackgroundColor(Color.WHITE);
+                break;
+        }
+    }
+
+    public static void setBackgroundRelative(SharedPreferences sharedPreferences, RelativeLayout background){
+        switch (sharedPreferences.getString("background_colour", "blank")){
+            case "gray":
+                background.setBackgroundColor(Color.GRAY);
+                break;
+
+            case "white":
+                background.setBackgroundColor(Color.WHITE);
+                break;
+        }
     }
 
 }

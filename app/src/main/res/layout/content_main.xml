@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -17,8 +18,8 @@
         android:id="@+id/nice_listview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World"
-        android:paddingTop="50dp"/>
+        android:paddingTop="50dp"
+        android:text="Hello World" />
 
     <TextView
         android:id="@+id/num_items"
