@@ -2,8 +2,10 @@ package com.johnhanlan.assignment7b;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,14 @@ public final class Helper {
             case "white":
                 background.setBackgroundColor(Color.WHITE);
                 break;
+        }
+    }
+
+    public static void showPubDate(SharedPreferences sharedPreferences, TextView textView) {
+        if(sharedPreferences.getBoolean("hide_pub_date", false)) {
+            textView.setVisibility(View.INVISIBLE);
+        } else {
+            textView.setVisibility(View.VISIBLE);
         }
     }
 

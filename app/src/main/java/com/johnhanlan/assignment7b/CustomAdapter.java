@@ -1,6 +1,7 @@
 package com.johnhanlan.assignment7b;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Layout;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,6 +22,12 @@ import java.util.Objects;
 public class CustomAdapter extends ArrayAdapter<Article> {
 
     private ArrayList<Article> articles;
+    private SharedPreferences sharedPreferences;
+
+    public CustomAdapter(Context context, int textViewResourceId, ArrayList<Article> articles, SharedPreferences sharedPreferences) {
+        this(context, textViewResourceId, articles);
+        this.sharedPreferences = sharedPreferences;
+    }
 
     public CustomAdapter(Context context, int textViewResourceId, ArrayList<Article> articles) {
         super(context, textViewResourceId, articles);
@@ -43,6 +51,10 @@ public class CustomAdapter extends ArrayAdapter<Article> {
         title.setText(singleArticle.getTitle());
         description.setText(singleArticle.getDescription());
         pubDate.setText(singleArticle.getPubDate());
+
+        if(sharedPreferences != null) {
+            Helper.showPubDate(sharedPreferences, pubDate);
+        }
 
 
         return customView;

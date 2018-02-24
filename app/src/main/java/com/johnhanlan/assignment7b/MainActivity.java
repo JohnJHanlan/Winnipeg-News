@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         Helper.setBackgroundLinear(sharedPreferences, main_view);
+        //Helper.showPubDate(sharedPreferences, (TextView) findViewById(R.id.pubText));
+        loadFeeds(new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.articles.get(Helper.feed), sharedPreferences));
     }
 
     private void loadFeeds(CustomAdapter customAdapter){
