@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
-    //private CustomAdapter customAdapter;
     private ProcessRSSTask processRSSTask;
 
     private SharedPreferences sharedPreferences;
@@ -73,14 +72,11 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         Helper.setBackgroundLinear(sharedPreferences, main_view);
-        //Helper.showPubDate(sharedPreferences, (TextView) findViewById(R.id.pubText));
         loadFeeds(new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.articles.get(Helper.feed), sharedPreferences));
     }
 
     private void loadFeeds(CustomAdapter customAdapter){
-        //setContentView(R.layout.content_main);
         customAdapter.notifyDataSetChanged();
-       //customAdapter = new CustomAdapter(MainActivity.this, R.layout.list_item, Helper.localArticles);
 
         //set the adapter of the ListView
         listView = findViewById(R.id.nice_listview);
@@ -116,9 +112,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

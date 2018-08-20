@@ -47,22 +47,4 @@ public class ArticleWebView extends AppCompatActivity {
         // It will probably exit the activity
         return super.onKeyDown(keyCode, event);
     }
-
-//    // Check if the link clicked is the one specified.
-//    private class MyWebViewClient extends WebViewClient {
-//        @Override
-//        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//            //return super.shouldOverrideUrlLoading(view, request);
-//
-//            // Check for the proper website
-//            if (Uri.parse(url).getHost().equals(Helper.localArticles.get(Helper.position).getLink())) {
-//                return false;
-//            }
-//
-//            // Otherwise open the default Web Browser
-//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Helper.localArticles.get(Helper.position).getLink()));
-//            startActivity(intent);
-//            return true;
-//        }
-//    }
 }
